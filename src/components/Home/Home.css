@@ -1,0 +1,93 @@
+.home {
+  background-color: #ffcc00;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.AppGlass {
+  display: grid;
+  height: 97%;
+  width: 97%;
+  border-radius: 2rem;
+  background-color: #ffcc00;
+  overflow: hidden;
+}
+
+.Container {
+  display: flex;
+  flex-direction: column;
+}
+.first_Section {
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  border-bottom: 2px solid #ffffff;
+}
+.search {
+  width: 360px;
+  background: #fff;
+  color: var(--input-text-color);
+  font: inherit;
+  box-shadow: 3px 6px 10px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  border: 0;
+  outline: 0;
+  padding: 22px 18px;
+}
+.btn--primary {
+  font: inherit;
+  transition: all 200ms ease-in;
+  cursor: pointer;
+  background: #000000;
+  color: #ffffff;
+  box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  padding: 12px 36px;
+  margin-left: -9px;
+}
+
+.secound_Section {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  position: relative;
+  gap: 20px;
+
+  background-color: #ffcc00;
+}
+.item_Cards {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
+  background-color: #ffffff;
+  color: #000000;
+  padding: 10px;
+  box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
+}
+.btn_delete_edit {
+  display: flex;
+  position: relative;
+  gap: 10px;
+}
+.edit_btn,
+.Delete_btn {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  color: #fff;
+  background-color: #000000;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 500;
+  line-height: 1;
+  padding: 1em 1.5em;
+  position: relative;
+  transition: filter 0.3s;
+}
+@media only screen and (max-width: 600px) {
+  .search {
+    width: 240px;
+  }
+}
