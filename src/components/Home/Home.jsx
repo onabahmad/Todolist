@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Home.css";
 
 const Home = () => {
@@ -6,16 +6,33 @@ const Home = () => {
   const [data, setData] = useState([]);
   const [show, setShow] = useState(false);
   const [edit, setEdit] = useState();
+  const [done, setDone] = useState([]);
+  useEffect(() => {
+    const storedData = localStorage.getItem("data");
+    if (storedData) {
+      setData(JSON.parse(storedData));
+    }
+  }, []);
 
   function handleAddItem() {
     if (Item.length !== 0) {
-      setData((newdata) => [...newdata, Item]);
+      const newData = [...data, Item];
+      setData(newData);
       setItem("");
+      localStorage.setItem("data", JSON.stringify(newData));
     }
   }
   function handleDelete(index) {
-    data.splice(index, 1);
-    setData([...data]);
+    const newData = [...data];
+    newData.splice(index, 1);
+
+    const newDone = done.filter((doneIndex) => doneIndex !== index);
+
+    setData(newData);
+    setDone(newDone);
+
+    localStorage.setItem("data", JSON.stringify(newData));
+    localStorage.setItem("done", JSON.stringify(newDone));
   }
   function handleEdit(i) {
     setItem(data[i]);
@@ -24,11 +41,22 @@ const Home = () => {
   }
   console.log(edit);
   function handleUpdate() {
-    data.splice(edit, 1, Item);
-    setData([...data]);
+    const newData = [...data];
+    newData.splice(edit, 1, Item);
+    setData(newData);
     setShow(false);
     setItem("");
+    localStorage.setItem("data", JSON.stringify(newData));
   }
+
+  function handledone(i) {
+    if (done.includes(i)) {
+      setDone(done.filter((index) => index !== i));
+    } else {
+      setDone([...done, i]);
+    }
+  }
+
   return (
     <div className="home">
       <div className="AppGlass">
@@ -54,10 +82,7 @@ const Home = () => {
           </div>
           <div className="secound_Section">
             {data.map((a, i) => (
-              <div
-                className="
-              item_Cards"
-              >
+              <div className={`item_Cards  ${done.includes(i) ? "done" : ""}`}>
                 <p>{a}</p>
                 <div className="btn_delete_edit">
                   <button
@@ -68,6 +93,9 @@ const Home = () => {
                   </button>
                   <button className="edit_btn" onClick={() => handleEdit(i)}>
                     Edit
+                  </button>
+                  <button className="edit_btn" onClick={() => handledone(i)}>
+                    Done
                   </button>
                 </div>
               </div>
